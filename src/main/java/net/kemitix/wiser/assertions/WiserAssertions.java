@@ -1,10 +1,15 @@
 package net.kemitix.wiser.assertions;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -53,7 +58,7 @@ public class WiserAssertions {
     public WiserAssertions withContent(String content) {
         findFirstOrElseThrow(m -> {
             ThrowingSupplier<String> contentAsString
-                    = () -> ((String) getMimeMessage(m).getContent()).trim();
+                    = () -> getMimeMessageBody(m).trim();
             return content.equals(unchecked(contentAsString));
         }, assertionError("No message with content [{0}] found!", content));
         return this;
@@ -63,11 +68,22 @@ public class WiserAssertions {
         StringBuilder messageContent = new StringBuilder();
         findFirstOrElseThrow((WiserMessage m) -> {
             ThrowingSupplier<String> contentAsString
-                    = () -> ((String) getMimeMessage(m).getContent()).trim();
+                    = () -> getMimeMessageBody(m).trim();
             messageContent.append(unchecked(contentAsString));
             return unchecked(contentAsString).contains(content);
         }, assertionError("No message with content containing [{0}] found! Was {1}", content, messageContent));
         return this;
+    }
+
+    private String getMimeMessageBody(WiserMessage m) throws IOException, MessagingException {
+        Object content = getMimeMessage(m).getContent();
+        if (content instanceof MimeMessage) {
+            return (String) content;
+        }
+        if (content instanceof MimeMultipart) {
+            return getMimeMultipartAsString((MimeMultipart) content);
+        }
+        throw new RuntimeException("Unexpected MimeMessage content");
     }
 
     private void findFirstOrElseThrow(Predicate<WiserMessage> predicate, Supplier<AssertionError> exceptionSupplier) {
@@ -89,6 +105,12 @@ public class WiserAssertions {
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String getMimeMultipartAsString(MimeMultipart mimeMultipart) throws MessagingException, IOException {
+        OutputStream os = new ByteArrayOutputStream();
+        mimeMultipart.writeTo(os);
+        return os.toString();
     }
 
     public interface ThrowingSupplier<T> {
