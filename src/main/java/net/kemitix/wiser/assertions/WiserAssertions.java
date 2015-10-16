@@ -5,7 +5,6 @@ import org.subethamail.wiser.WiserMessage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Predicate;
@@ -268,9 +267,9 @@ public final class WiserAssertions {
      */
     private String getMimeMultipartAsString(final MimeMultipart mimeMultipart)
             throws MessagingException, IOException {
-        OutputStream os = new ByteArrayOutputStream();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         mimeMultipart.writeTo(os);
-        return os.toString();
+        return os.toString("UTF-8");
     }
 
     /**
