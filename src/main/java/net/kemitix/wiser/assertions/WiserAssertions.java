@@ -184,7 +184,7 @@ public final class WiserAssertions {
             throws IOException, MessagingException {
         Object content = getMimeMessage(message).getContent();
         if (content instanceof MimeMessage) {
-            return (String) content;
+            return content.toString();
         }
         if (content instanceof MimeMultipart) {
             return getMimeMultipartAsString((MimeMultipart) content);
