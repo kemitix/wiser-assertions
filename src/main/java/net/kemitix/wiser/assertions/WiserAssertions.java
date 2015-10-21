@@ -3,7 +3,6 @@ package net.kemitix.wiser.assertions;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
@@ -256,7 +255,8 @@ public final class WiserAssertions {
     }
 
     /**
-     * Converts a {@link MimeMultipart} into a {@link String}.
+     * Converts a {@link MimeMultipart} into a {@link String} stripping out the
+     * mime part boundary and headers..
      *
      * @param mimeMultipart the message part to convert
      *
@@ -267,9 +267,11 @@ public final class WiserAssertions {
      */
     private String getMimeMultipartAsString(final MimeMultipart mimeMultipart)
             throws MessagingException, IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        mimeMultipart.writeTo(os);
-        return os.toString("UTF-8");
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < mimeMultipart.getCount(); i++) {
+            sb.append(mimeMultipart.getBodyPart(i).getContent());
+        }
+        return sb.toString();
     }
 
     /**

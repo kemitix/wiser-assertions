@@ -31,7 +31,7 @@
     <parent>
         <groupId>net.kemitix</groupId>
         <artifactId>kemitix-spring-parent</artifactId>
-        <version>1.1.7</version>
+        <version>1.2.1</version>
     </parent>
 
     <dependencies>
@@ -44,6 +44,17 @@
             <groupId>org.subethamail</groupId>
             <artifactId>subethasmtp</artifactId>
             <version>3.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
