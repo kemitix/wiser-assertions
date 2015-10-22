@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.2.0
+------
+
+* 4d01349 Add tests with improved conversion of MIME Multipart messages to string
+* d72ca46 Apply Checkstyle formatting (modified sun_checks) rules and add javadoc
+
 0.1.1
 -----
 
