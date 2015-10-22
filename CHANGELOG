@@ -1,0 +1,13 @@
+CHANGELOG
+=========
+
+0.1.1
+-----
+
+* Upgrade javax.mail to 1.4.7
+
+0.1.0
+-----
+
+* Initial release
+
