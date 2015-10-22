@@ -1,6 +1,10 @@
 # wiser-assertions
 Assertions for Wiser SMTP test server from subethamail
 
+## Origin
+
+Taken from Rafal Browiec [WiserAssertions] class.
+
 ## Usage
 
     @Before
@@ -33,3 +37,5 @@ Assertions for Wiser SMTP test server from subethamail
                 .withContentContains(message_element_2)
                 .withContentContains(message_element_3);
     }
+
+[WiserAssertions]:http://blog.codeleak.pl/2014/09/testing-mail-code-in-spring-boot.html
