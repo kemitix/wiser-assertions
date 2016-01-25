@@ -14,24 +14,24 @@ import javax.mail.Message;
  */
 public class Issue1Test extends AbstractWiserTest {
 
+    /**
+     * Test {@link WiserAssertions#withContentContains(String)} where
+     * the nested multipart message contains the expected text
+     */
     @Test
     public void shouldParseNestedMultiPartEmails() {
         //given
         final Email email = new Email();
-        email.addRecipient("Jonjo McKay", "jonjo.mckay@manywho.com",
+        email.addRecipient("Carl", "carl@b.com",
                 Message.RecipientType.TO);
-        email.setFromAddress("ManyWho", "no-reply@manywho.com");
-        email.setSubject("New activity");
-        email.setText("Hi Jonjo McKay,\n\nA new message was just posted in a "
-                + "stream you follow on ManyWho. The message was:\n\nLance "
-                + "Drake Mandrell: \"This is a test message\"\n\nJoin the flow "
-                + "at https://flow.manywho.com to read the stream and reply.\n"
-                + "\nManyWho Email Bot");
+        email.setFromAddress("Bob", "bob@a.com");
+        email.setSubject("Subject");
+        email.setText("Hi Carl,\n\nA new message was just posted.");
         Mailer mailer = new Mailer(getSession());
         //when
         mailer.sendMail(email);
         //then
-        getAssertions().withContent("Hi Jonjo McKay");
+        getAssertions().withContentContains("Hi Carl");
     }
 
 }
