@@ -270,7 +270,6 @@ public final class WiserAssertions {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mimeMultipart.getCount(); i++) {
             Object content = mimeMultipart.getBodyPart(i).getContent();
-
             if (content instanceof MimeMultipart) {
                 sb.append(getMimeMultipartAsString((MimeMultipart) content));
             } else {

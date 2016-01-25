@@ -15,8 +15,8 @@ import javax.mail.Message;
 public class Issue1Test extends AbstractWiserTest {
 
     /**
-     * Test {@link WiserAssertions#withContentContains(String)} where
-     * the nested multipart message contains the expected text
+     * Test {@link WiserAssertions#withContentContains(String)} where the nested
+     * multi-part message contains the expected text.
      */
     @Test
     public void shouldParseNestedMultiPartEmails() {
