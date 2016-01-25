@@ -209,7 +209,8 @@ public class WiserAssertionsTest {
         //given
         final String fragment = "foo";
         //when
-        sendMimeMultipartMessage("from", "to", "subject " + fragment + " tail", "body");
+        sendMimeMultipartMessage(
+                "from", "to", "subject " + fragment + " tail", "body");
         //then
         getAssertions().withSubjectContains(fragment);
     }
