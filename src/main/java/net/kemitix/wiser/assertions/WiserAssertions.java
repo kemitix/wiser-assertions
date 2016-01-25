@@ -269,7 +269,13 @@ public final class WiserAssertions {
             throws MessagingException, IOException {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mimeMultipart.getCount(); i++) {
-            sb.append(mimeMultipart.getBodyPart(i).getContent());
+            Object content = mimeMultipart.getBodyPart(i).getContent();
+
+            if (content instanceof MimeMultipart) {
+                sb.append(getMimeMultipartAsString((MimeMultipart) content));
+            } else {
+                sb.append(content);
+            }
         }
         return sb.toString();
     }
