@@ -1,21 +1,17 @@
 package net.kemitix.wiser.assertions;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.subethamail.wiser.Wiser;
 
 import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -27,41 +23,13 @@ import javax.mail.internet.MimeMultipart;
  *
  * @author pcampbell
  */
-public class WiserAssertionsTest {
+public class WiserAssertionsTest extends AbstractWiserTest {
 
     /**
      * Logger.
      */
     private static final Logger LOG
             = Logger.getLogger(WiserAssertionsTest.class.getName());
-
-    /**
-     * Test mail server.
-     */
-    private Wiser wiser;
-
-    /**
-     * Prepare each test.
-     */
-    @Before
-    @SuppressWarnings("magicnumber")
-    public void setUp() {
-        wiser = new Wiser(PORT);
-        wiser.start();
-    }
-
-    /**
-     * Test mail server port.
-     */
-    private static final int PORT = 12345;
-
-    /**
-     * Clean up after each test.
-     */
-    @After
-    public void tearDown() {
-        wiser.stop();
-    }
 
     /**
      * Sends a mime multipart message to the Wiser server.
@@ -76,12 +44,8 @@ public class WiserAssertionsTest {
             final String to,
             final String subject,
             final String body) {
-        Properties properties = new Properties();
-        properties.setProperty("mail.smtp.host", "localhost");
-        properties.setProperty("mail.smtp.port", "" + PORT);
-        Session session = Session.getDefaultInstance(properties);
         try {
-            MimeMessage message = new MimeMessage(session);
+            MimeMessage message = new MimeMessage(getSession());
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, to);
             message.setSubject(subject, "UTF-8");
@@ -94,15 +58,6 @@ public class WiserAssertionsTest {
         } catch (MessagingException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Instantiates the WiserAssertions.
-     *
-     * @return the wiser assertions
-     */
-    private WiserAssertions getAssertions() {
-        return WiserAssertions.assertReceivedMessage(wiser);
     }
 
     /**
