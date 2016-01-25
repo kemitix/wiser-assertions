@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+0.3.0
+------
+
+* Add support for nested multi-part emails [jonjo-manywho] [#1]
+
 0.2.0
 ------
 
