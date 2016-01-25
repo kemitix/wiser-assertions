@@ -78,15 +78,19 @@
 
     <module name="TreeWalker">
 
-		<!-- Support @SuppressWarnings annotation -->
-		<!-- See http://checkstyle.sourceforge.net/config.html -->
-		<module name="SuppressWarningsHolder"/>
+        <!-- Support @SuppressWarnings annotation -->
+        <!-- See http://checkstyle.sourceforge.net/config.html -->
+        <module name="SuppressWarningsHolder"/>
+
+        <module name="FileContentsHolder"/>
 
         <!-- Checks for Javadoc comments.                     -->
         <!-- See http://checkstyle.sf.net/config_javadoc.html -->
-        <module name="JavadocMethod"/>
+        <module name="JavadocMethod">
+            <property name="scope" value="public"/>
+        </module>
         <module name="JavadocType"/>
-        <module name="JavadocVariable"/>
+        <!--<module name="JavadocVariable"/>-->
         <module name="JavadocStyle"/>
 
 
@@ -113,12 +117,7 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength">
-            <!-- Allow for long imports for Spring Batch     -->
-            <!-- EnableBatchProcessing, JobBuilderFactory   -->
-            <!-- and StepBuilderFactory                     -->
-            <property name="ignorePattern" value="^import"/>
-        </module>
+        <module name="LineLength"/>
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 
@@ -157,7 +156,11 @@
         <module name="AvoidInlineConditionals"/>
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField"/>
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true"/>
+            <property name="ignoreSetter" value="true"/>
+            <property name="setterCanReturnItsClass" value="true"/>
+        </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MagicNumber"/>
@@ -183,6 +186,7 @@
 
     </module>
 
-	<module name="SuppressWarningsFilter"/>
+    <module name="SuppressWarningsFilter"/>
+    <module name="SuppressionCommentFilter"/>
 
 </module>
