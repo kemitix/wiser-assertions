@@ -56,6 +56,12 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.codemonkey.simplejavamail</groupId>
+            <artifactId>simple-java-mail</artifactId>
+            <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
