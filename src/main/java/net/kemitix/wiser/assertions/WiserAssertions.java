@@ -181,6 +181,9 @@ public final class WiserAssertions {
     private String getMimeMessageBody(final WiserMessage message)
             throws IOException, MessagingException {
         Object content = getMimeMessage(message).getContent();
+        if (content instanceof String) {
+            return (String) content;
+        }
         if (content instanceof MimeMessage) {
             return content.toString();
         }
