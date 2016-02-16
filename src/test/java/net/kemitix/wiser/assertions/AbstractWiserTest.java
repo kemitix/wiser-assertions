@@ -56,8 +56,8 @@ public abstract class AbstractWiserTest {
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.host", "localhost");
-        properties.setProperty("mail.smtp.port", "" + WiserAssertionsTest.PORT);
-        Session session = Session.getDefaultInstance(properties);
+        properties.setProperty("mail.smtp.port", "" + PORT);
+        Session session = Session.getInstance(properties);
         return session;
     }
 

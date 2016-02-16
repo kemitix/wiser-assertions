@@ -57,10 +57,16 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <dependency><!-- for Issue1Test -->
             <groupId>org.codemonkey.simplejavamail</groupId>
             <artifactId>simple-java-mail</artifactId>
             <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency><!-- for Issue6Test -->
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.2.4.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
