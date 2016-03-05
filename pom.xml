@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.kemitix</groupId>
     <artifactId>wiser-assertions</artifactId>
-    <version>0.3.1</version>
+    <version>0.4.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>wiser-assertions</name>
@@ -66,7 +66,7 @@
         <dependency><!-- for Issue6Test -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>4.2.4.RELEASE</version>
+            <version>4.2.5.RELEASE</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
