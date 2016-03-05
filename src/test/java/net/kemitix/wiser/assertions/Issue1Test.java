@@ -1,7 +1,7 @@
 package net.kemitix.wiser.assertions;
 
-import org.codemonkey.simplejavamail.Email;
 import org.codemonkey.simplejavamail.Mailer;
+import org.codemonkey.simplejavamail.email.Email;
 import org.junit.Test;
 
 import javax.mail.Message;
@@ -9,8 +9,8 @@ import javax.mail.Message;
 /**
  * Regression test for issue #1.
  *
- * @see https://github.com/kemitix/wiser-assertions/issues/1
  * @author pcampbell
+ * @see https://github.com/kemitix/wiser-assertions/issues/1
  */
 public class Issue1Test extends AbstractWiserTest {
 
