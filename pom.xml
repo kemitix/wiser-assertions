@@ -60,7 +60,7 @@
         <dependency><!-- for Issue1Test -->
             <groupId>org.codemonkey.simplejavamail</groupId>
             <artifactId>simple-java-mail</artifactId>
-            <version>2.5.1</version>
+            <version>3.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency><!-- for Issue6Test -->
