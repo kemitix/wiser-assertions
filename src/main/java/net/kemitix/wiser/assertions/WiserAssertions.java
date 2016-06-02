@@ -40,6 +40,9 @@ import java.util.function.Supplier;
  */
 public final class WiserAssertions {
 
+    private static final String ERROR_MESSAGE_SUBJECT
+            = "No message with subject [{0}] found!";
+
     /**
      * The messages received by Wiser.
      */
@@ -105,9 +108,8 @@ public final class WiserAssertions {
     public WiserAssertions withSubject(final String subject) {
         Predicate<WiserMessage> predicate
                 = m -> subject.equals(unchecked(getMimeMessage(m)::getSubject));
-        findFirstOrElseThrow(predicate,
-                assertionError("No message with subject [{0}] found!",
-                        subject));
+        findFirstOrElseThrow(predicate, assertionError(ERROR_MESSAGE_SUBJECT,
+                subject));
         return this;
     }
 
@@ -123,9 +125,8 @@ public final class WiserAssertions {
         Predicate<WiserMessage> predicate
                 = m -> unchecked(getMimeMessage(m)::getSubject)
                 .contains(subject);
-        findFirstOrElseThrow(predicate,
-                assertionError("No message with subject [{0}] found!",
-                        subject));
+        findFirstOrElseThrow(predicate, assertionError(ERROR_MESSAGE_SUBJECT,
+                subject));
         return this;
     }
 
