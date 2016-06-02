@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kemitix/wiser-assertions.svg?branch=develop)](https://travis-ci.org/kemitix/wiser-assertions)
+[![Coverage Status](https://coveralls.io/repos/github/kemitix/wiser-assertions/badge.svg?branch=develop)](https://coveralls.io/github/kemitix/wiser-assertions?branch=develop)
+
 # wiser-assertions
 Assertions for Wiser SMTP test server from subethamail
 
