@@ -181,16 +181,20 @@ public final class WiserAssertions {
     private String getMimeMessageBody(final WiserMessage message)
             throws IOException, MessagingException {
         Object content = getMimeMessage(message).getContent();
+        String result = null;
         if (content instanceof String) {
-            return (String) content;
+            result = (String) content;
         }
         if (content instanceof MimeMessage) {
-            return content.toString();
+            result = content.toString();
         }
         if (content instanceof MimeMultipart) {
-            return getMimeMultipartAsString((MimeMultipart) content);
+            result = getMimeMultipartAsString((MimeMultipart) content);
         }
-        throw new RuntimeException("Unexpected MimeMessage content");
+        if (result == null) {
+            throw new RuntimeException("Unexpected MimeMessage content");
+        }
+        return result;
     }
 
     /**
