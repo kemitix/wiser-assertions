@@ -302,6 +302,7 @@ public final class WiserAssertions {
          *
          * @throws Throwable on error
          */
+        @SuppressWarnings("illegalthrows")
         T get() throws Throwable;
     }
 }
