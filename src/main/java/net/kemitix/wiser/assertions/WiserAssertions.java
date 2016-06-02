@@ -3,15 +3,14 @@ package net.kemitix.wiser.assertions;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 /**
  * Provides a set of assertions for checking the status of any messages received
@@ -47,6 +46,15 @@ public final class WiserAssertions {
     private final List<WiserMessage> messages;
 
     /**
+     * Private constructor.
+     *
+     * @param wiserMessages the messages to be tested by the assertions
+     */
+    private WiserAssertions(final List<WiserMessage> wiserMessages) {
+        this.messages = wiserMessages;
+    }
+
+    /**
      * Creates an instance of {@code} WiserAssertions} ready to make assertions
      * on any messages received by the {@link Wiser} server.
      *
@@ -56,15 +64,6 @@ public final class WiserAssertions {
      */
     public static WiserAssertions assertReceivedMessage(final Wiser wiser) {
         return new WiserAssertions(wiser.getMessages());
-    }
-
-    /**
-     * Private constructor.
-     *
-     * @param wiserMessages the messages to be tested by the assertions
-     */
-    private WiserAssertions(final List<WiserMessage> wiserMessages) {
-        this.messages = wiserMessages;
     }
 
     /**
