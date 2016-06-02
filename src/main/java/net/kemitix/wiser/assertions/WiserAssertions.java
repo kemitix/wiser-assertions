@@ -3,39 +3,48 @@ package net.kemitix.wiser.assertions;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
 /**
  * Provides a set of assertions for checking the status of any messages received
  * by subethamail's Wiser.
- *
  * <pre>
- * {@code
+ * <code>
  * {@literal @}Before
- * public void setUp() throws IOException {
- *     wiser = new Wiser(PORT);
- *     wiser.start();
- * }
+ *  public void setUp() throws IOException {
+ *      wiser = new Wiser(PORT);
+ *      wiser.start();
+ *  }
  *
- * {@literal @}After public void tearDown() { wiser.stop(); }
+ * {@literal @}After
+ *  public void tearDown() {
+ *      wiser.stop();
+ *  }
  *
- * {@literal @}Test public void testMail() { //given ...
- *
- * //when ...
- *
- * //then WiserAssertions.assertReceivedMessage(wiser) .from(sender)
- * .to(recipient_alpha) .to(recipient_beta) .withSubjectContains(subject_prefix)
- * .withSubjectContains(subject_suffix) .withContentContains(message_element_1)
- * .withContentContains(message_element_2)
- * .withContentContains(message_element_3); }
- * }
+ * {@literal @}Test
+ *  public void testMail() {
+ *      //given ...
+ *      //when ...
+ *      //then
+ *      WiserAssertions.assertReceivedMessage(wiser)
+ *                     .from(sender)
+ *                     .to(recipient_alpha)
+ *                     .to(recipient_beta)
+ *                     .withSubjectContains(subject_prefix)
+ *                     .withSubjectContains(subject_suffix)
+ *                     .withContentContains(message_element_1)
+ *                     .withContentContains(message_element_2)
+ *                     .withContentContains(message_element_3);
+ *  }
+ * </code>
  * </pre>
  */
 public final class WiserAssertions {
@@ -84,6 +93,39 @@ public final class WiserAssertions {
     }
 
     /**
+     * Checks that at least on message matches the predicate or the supplied
+     * exception will be thrown.
+     *
+     * @param predicate         the condition a message must match
+     * @param exceptionSupplier the supplier of the exception
+     */
+    private void findFirstOrElseThrow(
+            final Predicate<WiserMessage> predicate,
+            final Supplier<AssertionError> exceptionSupplier) {
+        messages.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElseThrow(exceptionSupplier);
+    }
+
+    /**
+     * Returns a {@link Supplier} for an {@link AssertionError}.
+     *
+     * @param errorMessage the message for the exception
+     * @param args         the parameters to insert into the message using
+     *                     {@link MessageFormat}
+     *
+     * @return a supplier of an {@link AssertionError}
+     */
+    @SuppressWarnings(
+            {"ThrowableInstanceNotThrown", "ThrowableInstanceNeverThrown"})
+    private static Supplier<AssertionError> assertionError(
+            final String errorMessage, final Object... args) {
+        return () -> new AssertionError(
+                MessageFormat.format(errorMessage, args));
+    }
+
+    /**
      * Checks that there was at least one email received that was sent to the
      * {@code recipient}.
      *
@@ -106,11 +148,42 @@ public final class WiserAssertions {
      * @return the {@code WiserAssertions} instance
      */
     public WiserAssertions withSubject(final String subject) {
-        Predicate<WiserMessage> predicate
-                = m -> subject.equals(unchecked(getMimeMessage(m)::getSubject));
-        findFirstOrElseThrow(predicate, assertionError(ERROR_MESSAGE_SUBJECT,
-                subject));
+        Predicate<WiserMessage> predicate = m -> subject.equals(
+                unchecked(getMimeMessage(m)::getSubject));
+        findFirstOrElseThrow(predicate,
+                assertionError(ERROR_MESSAGE_SUBJECT, subject));
         return this;
+    }
+
+    /**
+     * Convert any checked Exceptions into unchecked Exceptions.
+     *
+     * @param <T>      the item type to be returned after suppressing any
+     *                 checked exceptions
+     * @param supplier the source of the return value that could cause a checked
+     *                 exception
+     *
+     * @return the product of the supplier
+     */
+    @SuppressWarnings("illegalCatch")
+    public static <T> T unchecked(final ThrowingSupplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Returns the mime message within the {@link WiserMessage} converting any
+     * {@link MessagingException}s into {@link RuntimeException}s.
+     *
+     * @param wiserMessage the message
+     *
+     * @return the mime message
+     */
+    private MimeMessage getMimeMessage(final WiserMessage wiserMessage) {
+        return unchecked(wiserMessage::getMimeMessage);
     }
 
     /**
@@ -122,11 +195,10 @@ public final class WiserAssertions {
      * @return the {@code WiserAssertions} instance
      */
     public WiserAssertions withSubjectContains(final String subject) {
-        Predicate<WiserMessage> predicate
-                = m -> unchecked(getMimeMessage(m)::getSubject)
-                .contains(subject);
-        findFirstOrElseThrow(predicate, assertionError(ERROR_MESSAGE_SUBJECT,
-                subject));
+        Predicate<WiserMessage> predicate = m -> unchecked(
+                getMimeMessage(m)::getSubject).contains(subject);
+        findFirstOrElseThrow(predicate,
+                assertionError(ERROR_MESSAGE_SUBJECT, subject));
         return this;
     }
 
@@ -140,8 +212,8 @@ public final class WiserAssertions {
      */
     public WiserAssertions withContent(final String content) {
         findFirstOrElseThrow(m -> {
-            ThrowingSupplier<String> contentAsString
-                    = () -> getMimeMessageBody(m).trim();
+            ThrowingSupplier<String> contentAsString = () -> getMimeMessageBody(
+                    m).trim();
             return content.equals(unchecked(contentAsString));
         }, assertionError("No message with content [{0}] found!", content));
         return this;
@@ -158,8 +230,8 @@ public final class WiserAssertions {
     public WiserAssertions withContentContains(final String content) {
         StringBuilder messageContent = new StringBuilder();
         findFirstOrElseThrow((WiserMessage m) -> {
-            ThrowingSupplier<String> contentAsString
-                    = () -> getMimeMessageBody(m).trim();
+            ThrowingSupplier<String> contentAsString = () -> getMimeMessageBody(
+                    m).trim();
             messageContent.append(unchecked(contentAsString));
             return unchecked(contentAsString).contains(content);
         }, assertionError(
@@ -195,71 +267,6 @@ public final class WiserAssertions {
             throw new RuntimeException("Unexpected MimeMessage content");
         }
         return result;
-    }
-
-    /**
-     * Checks that at least on message matches the predicate or the supplied
-     * exception will be thrown.
-     *
-     * @param predicate         the condition a message must match
-     * @param exceptionSupplier the supplier of the exception
-     */
-    private void findFirstOrElseThrow(
-            final Predicate<WiserMessage> predicate,
-            final Supplier<AssertionError> exceptionSupplier
-    ) {
-        messages.stream().filter(predicate)
-                .findFirst().orElseThrow(exceptionSupplier);
-    }
-
-    /**
-     * Returns the mime message within the {@link WiserMessage} converting any
-     * {@link MessagingException}s into {@link RuntimeException}s.
-     *
-     * @param wiserMessage the message
-     *
-     * @return the mime message
-     */
-    private MimeMessage getMimeMessage(final WiserMessage wiserMessage) {
-        return unchecked(wiserMessage::getMimeMessage);
-    }
-
-    /**
-     * Returns a {@link Supplier} for an {@link AssertionError}.
-     *
-     * @param errorMessage the message for the exception
-     * @param args         the parameters to insert into the message using
-     *                     {@link MessageFormat}
-     *
-     * @return a supplier of an {@link AssertionError}
-     */
-    @SuppressWarnings(
-            {"ThrowableInstanceNotThrown", "ThrowableInstanceNeverThrown"})
-    private static Supplier<AssertionError> assertionError(
-            final String errorMessage,
-            final Object... args
-    ) {
-        return ()
-                -> new AssertionError(MessageFormat.format(errorMessage, args));
-    }
-
-    /**
-     * Convert any checked Exceptions into unchecked Exceptions.
-     *
-     * @param <T>      the item type to be returned after suppressing any
-     *                 checked exceptions
-     * @param supplier the source of the return value that could cause a checked
-     *                 exception
-     *
-     * @return the product of the supplier
-     */
-    @SuppressWarnings("illegalCatch")
-    public static <T> T unchecked(final ThrowingSupplier<T> supplier) {
-        try {
-            return supplier.get();
-        } catch (Throwable e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
