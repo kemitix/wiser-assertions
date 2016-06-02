@@ -253,6 +253,7 @@ public final class WiserAssertions {
      *
      * @return the product of the supplier
      */
+    @SuppressWarnings("illegalCatch")
     public static <T> T unchecked(final ThrowingSupplier<T> supplier) {
         try {
             return supplier.get();
