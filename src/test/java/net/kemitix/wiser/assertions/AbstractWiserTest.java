@@ -4,40 +4,33 @@ import org.junit.After;
 import org.junit.Before;
 import org.subethamail.wiser.Wiser;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.util.Properties;
 
 import javax.mail.Session;
 
-/**
- * Abstract base class for wiser tests.
- *
- * @author pcampbell
- */
-public abstract class AbstractWiserTest {
+abstract class AbstractWiserTest {
 
-    /**
-     * Test mail server port.
-     */
-    protected static final int PORT = 12345;
+    private int port;
 
-    /**
-     * Test mail server.
-     */
     private Wiser wiser;
 
-    /**
-     * Prepare each test.
-     */
     @Before
-    @SuppressWarnings("magicnumber")
-    public void setUp() {
-        wiser = new Wiser(PORT);
+    public void setUp() throws IOException {
+        port = findFreePort();
+        wiser = new Wiser(port);
         wiser.start();
     }
 
-    /**
-     * Clean up after each test.
-     */
+    private int findFreePort() throws IOException {
+        try(final ServerSocket serverSocket = new ServerSocket()) {
+            serverSocket.bind(new InetSocketAddress(0));
+            return serverSocket.getLocalPort();
+        }
+    }
+
     @After
     public void tearDown() {
         wiser.stop();
@@ -56,9 +49,16 @@ public abstract class AbstractWiserTest {
         Properties properties = new Properties();
         properties.setProperty("mail.transport.protocol", "smtp");
         properties.setProperty("mail.smtp.host", "localhost");
-        properties.setProperty("mail.smtp.port", "" + PORT);
-        Session session = Session.getInstance(properties);
-        return session;
+        properties.setProperty("mail.smtp.port", "" + port);
+        return Session.getInstance(properties);
     }
 
+    /**
+     * The test mail server port.
+     *
+     * @return the port he test mail server is running on
+     */
+    protected int getPort() {
+        return port;
+    }
 }
