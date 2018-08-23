@@ -10,10 +10,9 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.kemitix</groupId>
     <artifactId>wiser-assertions</artifactId>
 
-    <version>0.4.0</version>
+    <version>DEV-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>wiser-assertions</name>
