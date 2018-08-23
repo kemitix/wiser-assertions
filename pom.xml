@@ -46,7 +46,7 @@
         <mockito-core.version>1.10.19</mockito-core.version>
         <simple-java-mail.version>3.1.1</simple-java-mail.version>
         <spring-framework.version>5.0.8.RELEASE</spring-framework.version>
-        <coveralls-maven-plugin.version>4.2.0</coveralls-maven-plugin.version>
+        <coveralls-maven-plugin.version>4.3.0</coveralls-maven-plugin.version>
 
         <jacoco-class-line-covered-ratio>0</jacoco-class-line-covered-ratio>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
