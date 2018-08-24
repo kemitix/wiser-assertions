@@ -26,7 +26,7 @@ public class Issue6Test extends AbstractWiserTest {
         message.setSubject("Subject");
         message.setText("Hi Carl,\n\nA new message was just posted.");
         final JavaMailSenderImpl sender = new JavaMailSenderImpl();
-        sender.setPort(PORT);
+        sender.setPort(getPort());
         //when
         sender.send(message);
         //then

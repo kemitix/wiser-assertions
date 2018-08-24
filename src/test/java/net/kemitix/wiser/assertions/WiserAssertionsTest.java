@@ -25,9 +25,6 @@ import javax.mail.internet.MimeMultipart;
  */
 public class WiserAssertionsTest extends AbstractWiserTest {
 
-    /**
-     * Logger.
-     */
     private static final Logger LOG
             = Logger.getLogger(WiserAssertionsTest.class.getName());
 
