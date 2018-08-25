@@ -120,11 +120,12 @@ public final class WiserAssertions {
      *
      * @param predicate         the condition a message must match
      * @param exceptionSupplier the supplier of the exception
+     * @return the first WiserMessage
      */
-    private void findFirstOrElseThrow(
+    private WiserMessage findFirstOrElseThrow(
             final Predicate<WiserMessage> predicate,
             final Supplier<AssertionError> exceptionSupplier) {
-        messages.stream()
+        return messages.stream()
                 .filter(predicate)
                 .findFirst()
                 .orElseThrow(exceptionSupplier);
