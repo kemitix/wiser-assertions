@@ -187,12 +187,12 @@ public final class WiserAssertions {
      *
      * @return the product of the supplier
      */
-    @SuppressWarnings("illegalCatch")
+    @SuppressWarnings("illegalcatch")
     public static <T> T unchecked(final ThrowingSupplier<T> supplier) {
         try {
             return supplier.get();
         } catch (Throwable e) {
-            throw new RuntimeException(e);
+            throw new WiserAssertionException(e);
         }
     }
 
@@ -275,7 +275,7 @@ public final class WiserAssertions {
     @SuppressWarnings("npathcomplexity")
     private String getMimeMessageBody(final WiserMessage message)
             throws IOException, MessagingException {
-        Object content = getMimeMessage(message).getContent();
+        final Object content = getMimeMessage(message).getContent();
         String result = null;
         if (content instanceof String) {
             result = (String) content;
@@ -287,7 +287,7 @@ public final class WiserAssertions {
             result = getMimeMultipartAsString((MimeMultipart) content);
         }
         if (result == null) {
-            throw new RuntimeException("Unexpected MimeMessage content");
+            throw new MimeMessageException("Unexpected MimeMessage content");
         }
         return result;
     }
