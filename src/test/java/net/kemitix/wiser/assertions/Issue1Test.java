@@ -31,7 +31,7 @@ public class Issue1Test extends AbstractWiserTest {
         //when
         mailer.sendMail(email);
         //then
-        getAssertions().withContentContains("Hi Carl");
+        assertReceivedMessage().withContentContains("Hi Carl");
     }
 
 }

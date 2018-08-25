@@ -41,7 +41,7 @@ abstract class AbstractWiserTest {
      *
      * @return the wiser assertions
      */
-    protected WiserAssertions getAssertions() {
+    protected WiserAssertions assertReceivedMessage() {
         return WiserAssertions.assertReceivedMessage(wiser);
     }
 

@@ -30,9 +30,9 @@ public class Issue6Test extends AbstractWiserTest {
         //when
         sender.send(message);
         //then
-        getAssertions().from("bob@a.com").to("carl@b.com")
-                .withSubject("Subject")
-                .withContentContains("Hi Carl");
+        assertReceivedMessage().from("bob@a.com").to("carl@b.com")
+                               .withSubject("Subject")
+                               .withContentContains("Hi Carl");
     }
 
 }
