@@ -49,9 +49,15 @@
         <jacoco-class-line-covered-ratio>0</jacoco-class-line-covered-ratio>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
         <jacoco-class-missed-count-maximum>1</jacoco-class-missed-count-maximum>
+        <mon.version>0.12.0</mon.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>net.kemitix</groupId>
+            <artifactId>mon</artifactId>
+            <version>${mon.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
