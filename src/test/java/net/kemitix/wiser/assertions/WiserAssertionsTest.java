@@ -68,7 +68,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        getAssertions().withContent(body);
+        assertReceivedMessage().withContent(body);
     }
 
     /**
@@ -82,7 +82,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        getAssertions().withContent("Other body");
+        assertReceivedMessage().withContent("Other body");
     }
 
     /**
@@ -96,7 +96,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        getAssertions().withContentContains("age bo");
+        assertReceivedMessage().withContentContains("age bo");
     }
 
     /**
@@ -110,7 +110,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        getAssertions().withContentContains("agebo");
+        assertReceivedMessage().withContentContains("agebo");
     }
 
     /**
@@ -126,7 +126,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage(from, "to", "subject", "body");
         //then
-        getAssertions().from(from);
+        assertReceivedMessage().from(from);
     }
 
     /**
@@ -140,7 +140,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage(from, "to", "subject", "body");
         //then
-        getAssertions().from("lisa@c.com");
+        assertReceivedMessage().from("lisa@c.com");
     }
 
     /**
@@ -149,7 +149,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      */
     @Test
     public void testInstantiate() {
-        assertNotNull(getAssertions());
+        assertNotNull(assertReceivedMessage());
     }
 
     /**
@@ -164,7 +164,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         sendMimeMultipartMessage(
                 "from", "to", "subject " + fragment + " tail", "body");
         //then
-        getAssertions().withSubjectContains(fragment);
+        assertReceivedMessage().withSubjectContains(fragment);
     }
 
     /**
@@ -178,7 +178,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", "subject tail", "body");
         //then
-        getAssertions().withSubjectContains(fragment);
+        assertReceivedMessage().withSubjectContains(fragment);
     }
 
     /**
@@ -192,7 +192,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", subject, "body");
         //then
-        getAssertions().withSubject(subject);
+        assertReceivedMessage().withSubject(subject);
     }
 
     /**
@@ -206,7 +206,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", "to", subject, "body");
         //then
-        getAssertions().withSubject("other subject");
+        assertReceivedMessage().withSubject("other subject");
     }
 
     /**
@@ -220,7 +220,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", to, "subject", "body");
         //then
-        getAssertions().to(to);
+        assertReceivedMessage().to(to);
     }
 
     /**
@@ -235,7 +235,7 @@ public class WiserAssertionsTest extends AbstractWiserTest {
         //when
         sendMimeMultipartMessage("from", to, "subject", "body");
         //then
-        getAssertions().to("bob@a.com");
+        assertReceivedMessage().to("bob@a.com");
     }
 
 }

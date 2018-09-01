@@ -1,6 +1,25 @@
 CHANGELOG
 =========
 
+0.5.0
+-----
+
+* Compatible with Java 10
+* Bump kemitix-parent from 1.1.0 to 5.1.1
+* Use kemitix-checkstyle-ruleset 4.1.1
+* Don't throw generic exceptions
+* Add mon 0.12.0 as dependency
+* Bump tiles-maven-plugin from 2.11 to 2.12
+* [testing] Use a free port for test mail server
+* [testing] Bump mockito-core from 1.10.19 to 2.21.0
+* [testing] Bump spring-context-support from 4.2.6.RELEASE to 5.0.8.RELEASE
+* [testing] Bump simple-java-mail from 3.0.1 to 3.1.1
+* [admin] Simpliify .gitignore
+* [admin] Remove old netbeans config
+* [admin] Switch to trunk based development
+* [admin] Stop submitting coverage reports to coveralls
+* [admin] Switch to Jenkins for CI/CD
+
 0.4.0
 ------
 
