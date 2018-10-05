@@ -22,6 +22,7 @@
 package net.kemitix.wiser.assertions;
 
 import net.kemitix.mon.maybe.Maybe;
+import net.kemitix.mon.result.Result;
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 
@@ -31,7 +32,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -234,11 +238,7 @@ public final class WiserAssertions {
 
     private Maybe<String> contentAsMultiPartMime(final Object content) {
         if (content instanceof MimeMultipart) {
-            try {
-                return Maybe.just(getMimeMultipartAsString((MimeMultipart) content));
-            } catch (MessagingException | IOException e) {
-                throw new RuntimeException(e);
-            }
+            return mimeMultipartAsString((MimeMultipart) content);
         }
         return Maybe.nothing();
     }
@@ -264,22 +264,39 @@ public final class WiserAssertions {
      * @param mimeMultipart the message part to convert
      *
      * @return the message part as a string
-     *
-     * @throws MessagingException if the part is empty
-     * @throws IOException        if there is another error
      */
-    private String getMimeMultipartAsString(final MimeMultipart mimeMultipart)
-            throws MessagingException, IOException {
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < mimeMultipart.getCount(); i++) {
-            Object content = mimeMultipart.getBodyPart(i).getContent();
-            if (content instanceof MimeMultipart) {
-                sb.append(getMimeMultipartAsString((MimeMultipart) content));
-            } else {
-                sb.append(content);
-            }
+    private Maybe<String> mimeMultipartAsString(final MimeMultipart mimeMultipart) {
+        return Result.toMaybe(Result.of(mimeMultipart::getCount)
+                        .map(count -> bodyPartsAsString(mimeMultipart, count)));
+    }
+
+    private String bodyPartsAsString(final MimeMultipart mimeMultipart, final int count) {
+        return IntStream.range(0, count)
+                .mapToObj(i -> bodyPart(mimeMultipart, i))
+                .map(this::bodyPartAsString)
+                .map(Result::orElseThrowUnchecked)
+                .collect(Collectors.joining());
+    }
+
+    private Result<String> bodyPartAsString(final Result<BodyPart> bodyPart) {
+        return bodyPartContent(bodyPart)
+                .flatMap(this::contentObjectAsString);
+    }
+
+    private Result<Object> bodyPartContent(final Result<BodyPart> bodyPart) {
+        return bodyPart.flatMap(part -> Result.of(part::getContent));
+    }
+
+    private Result<BodyPart> bodyPart(final MimeMultipart mimeMultipart, final int i) {
+        return Result.of(() -> mimeMultipart.getBodyPart(i));
+    }
+
+    private Result<String> contentObjectAsString(final Object content) {
+        if (content instanceof MimeMultipart) {
+            return Result.of(() -> mimeMultipartAsString((MimeMultipart) content).orElse(""));
+        } else {
+            return Result.ok((String) content);
         }
-        return sb.toString();
     }
 
 }
