@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+0.5.1
+-----
+
+* Bump mockito-core from 2.21.0 to 2.22.0 (#36)
+* Bump mon from 0.12.0 to 1.1.0 (#38)
+* Bump mockito-core from 2.22.0 to 2.23.0 (#40)
+* Bump mon from 1.1.0 to 1.2.0 (#41)
+* Bump kemitix-parent from 5.1.1 to 5.2.0 (#39)
+
 0.5.0
 -----
 
@@ -24,7 +33,7 @@ CHANGELOG
 ------
 
 * Upgrade kemitix-parent to 1.1.0
-* (pom) Specify dependency versions in properties 
+* (pom) Specify dependency versions in properties
 * Upgrade spring-context-support to 4.2.6 (tests)
 * Upgrade simple-java-mail to 3.0.1 (tests)
 
