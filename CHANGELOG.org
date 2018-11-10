@@ -1,10 +1,19 @@
 * CHANGELOG
 
-** 0.5.1
+** next-release
 
-  * Bump mon from 0.12.0 to 2.0.0 (#38)(#41)(#43)
-  * Bump mockito-core from 2.21.0 to 2.23.0 (#36)(#40)
-  * Bump kemitix-parent from 5.1.1 to 5.2.0 (#39)
+*** Dependencies
+
+   * Bump mockito-core from 2.21.0 to 2.23.0
+   * Bump mon from 0.12.0 to 2.0.0
+   * Bump kemitix-parent from 5.1.1 to 5.2.0
+   * Bump spring-context-support from 5.0.8 to 5.1.2
+   * Bump kemitix-checkstyle-ruleset from 4.1.1 to 5.2.0
+   * Bump kemitix-maven-tiles from 0.9.0 to 2.0.0
+
+*** Removed
+
+   * Remove travis config
 
 ** 0.5.0
 
