@@ -1,6 +1,6 @@
 * CHANGELOG
 
-** next-release
+** [0.5.1] - unreleased
 
 *** Dependencies
 
