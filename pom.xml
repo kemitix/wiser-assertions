@@ -35,7 +35,7 @@
 
     <properties>
         <tiles-maven-plugin.version>2.12</tiles-maven-plugin.version>
-        <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
+        <kemitix-maven-tiles.version>2.0.0</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>5.2.0</kemitix-checkstyle.version>
         <digraph-dependency.basePackage>net.kemitix.wiser.assertions</digraph-dependency.basePackage>
 
@@ -103,7 +103,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <tiles>
-                        <tile>net.kemitix.tiles:all:${kemitix-tiles.version}</tile>
+                        <tile>net.kemitix.tiles:all:${kemitix-maven-tiles.version}</tile>
                         <tile>net.kemitix.checkstyle:tile:${kemitix-checkstyle.version}</tile>
                     </tiles>
                 </configuration>
