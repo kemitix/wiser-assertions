@@ -1,0 +1,61 @@
+* CHANGELOG
+
+** 0.5.1
+
+  * Bump mon from 0.12.0 to 2.0.0 (#38)(#41)(#43)
+  * Bump mockito-core from 2.21.0 to 2.23.0 (#36)(#40)
+  * Bump kemitix-parent from 5.1.1 to 5.2.0 (#39)
+
+** 0.5.0
+
+  * Compatible with Java 10
+  * Bump kemitix-parent from 1.1.0 to 5.1.1
+  * Use kemitix-checkstyle-ruleset 4.1.1
+  * Don't throw generic exceptions
+  * Add mon 0.12.0 as dependency
+  * Bump tiles-maven-plugin from 2.11 to 2.12
+  * [testing] Use a free port for test mail server
+  * [testing] Bump mockito-core from 1.10.19 to 2.21.0
+  * [testing] Bump spring-context-support from 4.2.6.RELEASE to 5.0.8.RELEASE
+  * [testing] Bump simple-java-mail from 3.0.1 to 3.1.1
+  * [admin] Simpliify .gitignore
+  * [admin] Remove old netbeans config
+  * [admin] Switch to trunk based development
+  * [admin] Stop submitting coverage reports to coveralls
+  * [admin] Switch to Jenkins for CI/CD
+
+** 0.4.0
+
+  * Upgrade kemitix-parent to 1.1.0
+  * (pom) Specify dependency versions in properties
+  * Upgrade spring-context-support to 4.2.6 (tests)
+  * Upgrade simple-java-mail to 3.0.1 (tests)
+
+** 0.3.2
+
+  * Upgrade to test with spring-context-support 4.2.5
+  * Upgrade to test with simple-java-mail 3.0.0
+  * Upgrade kemitix-parent to 0.9.0
+
+** 0.3.1
+
+  * Add support for Spring Mail's SimpleMailMessage [fixes #6]
+  * Upgrade kemitix-parent to 0.7.1
+
+** 0.3.0
+
+  * Add support for nested multi-part emails [jonjo-manywho] [#1]
+
+** 0.2.0
+
+  * 4d01349 Add tests with improved conversion of MIME Multipart messages to string
+  * d72ca46 Apply Checkstyle formatting (modified sun_checks) rules and add javadoc
+
+** 0.1.1
+
+  * Upgrade javax.mail to 1.4.7
+
+** 0.1.0
+
+  * Initial release
+
