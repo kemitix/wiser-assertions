@@ -66,7 +66,7 @@ pipeline {
         stage('Build Java 11') {
             steps {
                 withMaven(maven: 'maven', jdk: 'JDK 11') {
-                    sh "${mvn} clean verify -Djava.version=1"
+                    sh "${mvn} clean verify -Djava.version=11"
                 }
             }
         }
