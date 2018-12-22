@@ -21,6 +21,7 @@
 
 package net.kemitix.wiser.assertions;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.kemitix.mon.maybe.Maybe;
 import net.kemitix.mon.result.Result;
 import org.subethamail.wiser.Wiser;
@@ -171,6 +172,7 @@ public final class WiserAssertions {
         return this;
     }
 
+    @SuppressFBWarnings("EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS")
     private String subject(final WiserMessage wiserMessage) {
         try {
             return wiserMessage.getMimeMessage().getSubject();
@@ -207,6 +209,7 @@ public final class WiserAssertions {
         return this;
     }
 
+    @SuppressFBWarnings("EXS_EXCEPTION_SOFTENING_NO_CONSTRAINTS")
     private String messageBody(final WiserMessage m) {
         try {
             return messageBody(m.getMimeMessage().getContent());
