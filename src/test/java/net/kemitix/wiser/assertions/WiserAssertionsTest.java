@@ -1,9 +1,10 @@
 package net.kemitix.wiser.assertions;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.subethamail.wiser.Wiser;
 
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -75,14 +76,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * Test {@link WiserAssertions#withContent(java.lang.String)} where the
      * content of the email does not match.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testContentNotMatches() {
         //given
         final String body = "message body";
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        assertReceivedMessage().withContent("Other body");
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .withContent("Other body"));
     }
 
     /**
@@ -103,14 +107,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * Test {@link WiserAssertions#withContentContains(String)} where the
      * content of the email does not match.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testContentContainsNotMatches() {
         //given
         final String body = "message body";
         //when
         sendMimeMultipartMessage("from", "to", "subject", body);
         //then
-        assertReceivedMessage().withContentContains("agebo");
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .withContentContains("agebo"));
     }
 
     /**
@@ -133,14 +140,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * Test {@link WiserAssertions#from(java.lang.String)} can detect when mail
      * is not sent from a user.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testFromNotMatches() {
         //given
         final String from = "bob@a.com";
         //when
         sendMimeMultipartMessage(from, "to", "subject", "body");
         //then
-        assertReceivedMessage().from("lisa@c.com");
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .from("lisa@c.com"));
     }
 
     /**
@@ -149,7 +159,8 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      */
     @Test
     public void testInstantiate() {
-        assertNotNull(assertReceivedMessage());
+        assertThat(assertReceivedMessage())
+                .isNotNull();
     }
 
     /**
@@ -171,14 +182,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * Test {@link WiserAssertions#withSubjectContains(java.lang.String)} where
      * the subject does not contain the expected fragment.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testSubjectContainsNotMatches() {
         //given
         final String fragment = "foo";
         //when
         sendMimeMultipartMessage("from", "to", "subject tail", "body");
         //then
-        assertReceivedMessage().withSubjectContains(fragment);
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .withSubjectContains(fragment));
     }
 
     /**
@@ -199,14 +213,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * Test {@link WiserAssertions#withSubject(java.lang.String)} where the
      * message does not have the subject expected.
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testSubjectNotMatches() {
         //given
         final String subject = "message subject";
         //when
         sendMimeMultipartMessage("from", "to", subject, "body");
         //then
-        assertReceivedMessage().withSubject("other subject");
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .withSubject("other subject"));
     }
 
     /**
@@ -228,14 +245,17 @@ public class WiserAssertionsTest extends AbstractWiserTest {
      * is not sent from a user.
      *
      */
-    @Test(expected = AssertionError.class)
+    @Test
     public void testToNotMatches() {
         //given
         final String to = "carl@b.com";
         //when
         sendMimeMultipartMessage("from", to, "subject", "body");
         //then
-        assertReceivedMessage().to("bob@a.com");
+        assertThatExceptionOfType(AssertionError.class)
+                .isThrownBy(() ->
+                        assertReceivedMessage()
+                                .to("bob@a.com"));
     }
 
 }

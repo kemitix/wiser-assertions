@@ -1,7 +1,7 @@
 package net.kemitix.wiser.assertions;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.subethamail.wiser.Wiser;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ abstract class AbstractWiserTest {
 
     private Wiser wiser;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         port = findFreePort();
         wiser = new Wiser(port);
@@ -31,7 +31,7 @@ abstract class AbstractWiserTest {
         }
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         wiser.stop();
     }

@@ -1,7 +1,6 @@
 package net.kemitix.wiser.assertions;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
