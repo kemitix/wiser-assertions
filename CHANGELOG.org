@@ -7,25 +7,64 @@ The format is based on [[https://keepachangelog.com/en/1.0.0/][Keep a Changelog]
 
 * 0.5.1
 
+** Added
+
+ - Test building with JDK 13 (#88)
+
 ** Changed
 
-   - Suppress spotbugs warning about softening checked exceptions
+ - Add github actions (#85)
+ - Suppress spotbugs warning about softening checked exceptions
 
 ** Dependencies
 
-   - Bump mockito-core from 2.21.0 to 2.23.4 (#36)(#40)(#47)
-   - Bump mon from 0.12.0 to 2.0.0 (#38)(#41)
-   - Bump kemitix-parent from 5.1.1 to 5.2.0 (#39)
-   - Bump spring-context-support from 5.0.8.RELEASE to 5.1.5.RELEASE (#44)(#45)(#48)(#51)(#52)
-   - Bump kemitix-checkstyle-ruleset from 4.1.1 to 5.3.2 (#46)(#49)
-   - Bump kemitix-maven-tiles from 0.9.0 to 2.1.2 (#46)(#49)
-   - Bump spotbugs-annotations from 3.1.8 to 3.1.11 (#50)
-   - Bump tiles-maven-plugin from 2.12 to 2.13 (#54)
+ - Upgrade dependencies (#87)
+ - Upgrade JUnit 4.13 to 5.6.1 (#86)
+ - Bump mockito-core from 3.0.0 to 3.3.3 (#81)
+ - Bump tiles-maven-plugin from 2.15 to 2.16 (#73)
+ - Bump junit from 4.12 to 4.13 (#76)
+ - Bump spring-context-support from 5.2.0.RELEASE to 5.2.4.RELEASE (#80)
+ - Bump spotbugs-annotations from 3.1.12 to 4.0.1 (#83)
+ - Bump kemitix-parent from 5.2.0 to 5.3.0 (#82)
+ - Bump mon from 2.0.0 to 2.1.0 (#84)
+ - Bump spring-context-support from 5.1.10.RELEASE to 5.2.0.RELEASE (#69)
+ - Bump spring-context-support from 5.1.9.RELEASE to 5.1.10.RELEASE (#68)
+ - Bump spring-context-support from 5.1.8.RELEASE to 5.1.9.RELEASE (#67)
+ - Bump mockito-core from 2.28.2 to 3.0.0 (#66)
+ - Bump tiles-maven-plugin from 2.14 to 2.15 (#65)
+ - Bump mockito-core from 2.27.0 to 2.28.2 (#63)
+ - Bump spring-context-support from 5.1.7.RELEASE to 5.1.8.RELEASE (#64)
+ - Bump spring-context-support from 5.1.6.RELEASE to 5.1.7.RELEASE (#62)
+ - Bump tiles-maven-plugin from 2.13 to 2.14 (#61)
+ - Bump mockito-core from 2.26.0 to 2.27.0 (#60)
+ - Bump mockito-core from 2.25.1 to 2.26.0 (#59)
+ - Bump spring-context-support from 5.1.5.RELEASE to 5.1.6.RELEASE (#58)
+ - Bump mockito-core from 2.25.0 to 2.25.1 (#57)
+ - Bump mockito-core from 2.24.5 to 2.25.0 (#56)
+ - Bump spotbugs-annotations from 3.1.11 to 3.1.12 (#55)
+ - Bump mockito-core from 2.23.4 to 2.24.5 (#53)
+ - Bump spring-context-support from 5.1.4.RELEASE to 5.1.5.RELEASE (#52)
+ - Bump tiles-maven-plugin from 2.12 to 2.13 (#54)
+ - Bump spring-context-support from 5.1.3.RELEASE to 5.1.4.RELEASE (#51)
+ - Bump spotbugs-annotations from 3.1.8 to 3.1.11 (#50)
+ - Bump kemitix depedencies and convert changelog to org-mode (#49)
+ - Bump spring-context-support from 5.1.2.RELEASE to 5.1.3.RELEASE (#48)
+ - Bump mockito-core from 2.23.0 to 2.23.4 (#47)
+ - Bump kemitix dependencies (#46)
+ - Bump spring-context-support from 5.1.1.RELEASE to 5.1.2.RELEASE (#45)
+ - Bump spring-context-support from 5.0.8.RELEASE to 5.1.1.RELEASE (#44)
+ - Bump mon from 1.2.0 to 2.0.0 (#43)
+ - Bump kemitix-parent from 5.1.1 to 5.2.0
+ - Bump mon from 1.1.0 to 1.2.0
+ - Bump mockito-core from 2.22.0 to 2.23.0
+ - Bump mon from 1.0.0 to 1.1.0
+ - Bump mon from 0.12.0 to 1.0.0
+ - Bump mockito-core from 2.21.0 to 2.22.0
 
 ** Removed
 
-   - Remove travis config
-   - Remove CI dependency on sonarcloud
+ - Remove travis config
+ - Remove CI dependency on sonarcloud
 
 * 0.5.0
 
