@@ -50,7 +50,7 @@
         <jacoco-class-line-covered-ratio>0</jacoco-class-line-covered-ratio>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
         <jacoco-class-missed-count-maximum>1</jacoco-class-missed-count-maximum>
-        <mon.version>2.0.0</mon.version>
+        <mon.version>2.1.0</mon.version>
         <spotbugs.version>3.1.12</spotbugs.version>
     </properties>
 
