@@ -2,7 +2,7 @@ package net.kemitix.wiser.assertions;
 
 import org.codemonkey.simplejavamail.Mailer;
 import org.codemonkey.simplejavamail.email.Email;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.mail.Message;
 
