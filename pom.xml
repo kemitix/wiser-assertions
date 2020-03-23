@@ -38,8 +38,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <tiles-maven-plugin.version>2.16</tiles-maven-plugin.version>
-        <kemitix-maven-tiles.version>2.1.2</kemitix-maven-tiles.version>
-        <kemitix-tiles.version>0.9.0</kemitix-tiles.version>
+        <kemitix-maven-tiles.version>2.4.1</kemitix-maven-tiles.version>
         <kemitix-checkstyle.version>5.3.2</kemitix-checkstyle.version>
         <digraph-dependency.basePackage>net.kemitix.wiser.assertions</digraph-dependency.basePackage>
 
