@@ -12,7 +12,7 @@
 
     <artifactId>wiser-assertions</artifactId>
 
-    <version>DEV-SNAPSHOT</version>
+    <version>0.6.0</version>
     <packaging>jar</packaging>
 
     <name>wiser-assertions</name>
