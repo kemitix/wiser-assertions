@@ -53,7 +53,7 @@
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
         <jacoco-class-missed-count-maximum>1</jacoco-class-missed-count-maximum>
         <mon.version>2.2.0</mon.version>
-        <spotbugs.version>4.1.2</spotbugs.version>
+        <spotbugs.version>4.2.0</spotbugs.version>
         <assertj.version>3.19.0</assertj.version>
     </properties>
 
