@@ -53,7 +53,7 @@
         <jacoco-class-missed-count-maximum>1</jacoco-class-missed-count-maximum>
         <mon.version>3.0.0</mon.version>
         <spotbugs.version>4.4.1</spotbugs.version>
-        <assertj.version>3.19.0</assertj.version>
+        <assertj.version>3.23.0</assertj.version>
     </properties>
 
     <dependencies>
