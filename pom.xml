@@ -46,7 +46,7 @@
         <junit.version>5.7.2</junit.version>
         <mockito-core.version>3.10.0</mockito-core.version>
         <simple-java-mail.version>3.1.1</simple-java-mail.version>
-        <spring-framework.version>5.3.8</spring-framework.version>
+        <spring-framework.version>6.0.3</spring-framework.version>
 
         <jacoco-class-line-covered-ratio>0</jacoco-class-line-covered-ratio>
         <jacoco-class-instruction-covered-ratio>0</jacoco-class-instruction-covered-ratio>
